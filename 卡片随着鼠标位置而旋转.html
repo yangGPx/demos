@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;padding: 0;
+    }
+    .content{
+      padding: 40px;border: 1px solid pink;
+    }
+    .wrapper{
+      width: 425px;
+      border: 1px solid pink;
+      padding: 20px;
+      background: rgba(0,0,0,0.1);
+    }
+    .box{
+      width: 100px;height: 100px;background: skyblue;border: 1px solid pink;
+      display: inline-block;
+    }
+    .title{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1 class="title">做一个鼠标移动效果,这个需要多张对比才能显示出效果</h1>
+    <div class="wrapper">
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+      <div class="box" id="boxY"></div>
+    </div>
+  </div>
+  <script>
+    const boxy = document.querySelectorAll('.box');
+    boxy.forEach(el => {
+      el.addEventListener('mousemove', function(e) {
+        const width = e.target.clientWidth;
+        const height = e.target.clientHeight;
+        const centerPosition = {
+          x: Math.floor(width/2),
+          y: Math.floor(height/2),
+        };
+        const rx = (e.offsetX - centerPosition.x) / centerPosition.x;
+        const ry = -(e.offsetY - centerPosition.y) / centerPosition.y;
+        const zf1 = (e.offsetX - centerPosition.x) / centerPosition.x > 0 ? -1 : 1;
+        const zf2 = (e.offsetY - centerPosition.y) / centerPosition.y > 0 ? 1 : -1;
+        const deg =   (Math.sqrt(Math.pow(e.offsetX - centerPosition.x, 2) + Math.pow(e.offsetY - centerPosition.y, 2))) / (Math.sqrt(Math.pow(centerPosition.x, 2) + Math.pow(- centerPosition.y, 2)))
+        e.target.style.transform = `rotate3d(${ry},${rx},0,${deg * 30}deg)`
+      })
+      el.addEventListener('mouseleave', function(e) {
+        e.target.style.transform = `rotate3d(1,1,0,0deg)`
+      })
+
+    })
+  </script>
+</body>
+</html>
