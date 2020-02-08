@@ -61,15 +61,13 @@
         };
         const rx = (e.offsetX - centerPosition.x) / centerPosition.x;
         const ry = -(e.offsetY - centerPosition.y) / centerPosition.y;
-        const zf1 = (e.offsetX - centerPosition.x) / centerPosition.x > 0 ? -1 : 1;
-        const zf2 = (e.offsetY - centerPosition.y) / centerPosition.y > 0 ? 1 : -1;
-        const deg =   (Math.sqrt(Math.pow(e.offsetX - centerPosition.x, 2) + Math.pow(e.offsetY - centerPosition.y, 2))) / (Math.sqrt(Math.pow(centerPosition.x, 2) + Math.pow(- centerPosition.y, 2)))
-        e.target.style.transform = `rotate3d(${ry},${rx},0,${deg * 30}deg)`
-      })
-      el.addEventListener('mouseleave', function(e) {
-        e.target.style.transform = `rotate3d(1,1,0,0deg)`
-      })
+        const deg = Math.sqrt(Math.pow(e.offsetX - centerPosition.x, 2) + Math.pow(e.offsetY - centerPosition.y, 2)) / Math.sqrt(Math.pow(centerPosition.x, 2) + Math.pow(- centerPosition.y, 2));
+        e.target.style.transform = `rotate3d(${ry},${rx},0,${deg * 30}deg)`;
+      });
 
+      el.addEventListener('mouseleave', function(e) {
+        e.target.style.transform = `rotate3d(1,1,0,0deg)`;
+      });
     })
   </script>
 </body>
